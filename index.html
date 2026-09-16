@@ -30,6 +30,7 @@ oneTap.render({
 .on(VKID.WidgetEvents.ERROR, console.error)
 .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, function(payload) {
 
+    console.log("LOGIN SUCCESS");
     console.log("CODE:", payload.code);
     console.log("DEVICE ID:", payload.device_id);
 
@@ -37,7 +38,12 @@ oneTap.render({
         .then(function(data) {
             console.log("VK RESPONSE:", data);
         })
-        .catch(console.error);
+        .catch(function(error) {
+            console.error("EXCHANGE ERROR:", error);
+        });
+})
+.on(VKID.WidgetEvents.ERROR, function(error) {
+    console.error("VKID ERROR:", error);
 });
 </script>
 
